@@ -183,3 +183,22 @@ class TriviaGameShow {
    // </video>
  
 }
+
+
+// https://stackoverflow.com/questions/2030285/regex-for-file-path-validation-in-javascript
+function windowsPathValidation(contwinpath)
+{
+   if((contwinpath.charAt(0) != "\\" || contwinpath.charAt(1) != "\\") || (contwinpath.charAt(0) != "/" || contwinpath.charAt(1) != "/"))
+   {
+      if(!contwinpath.charAt(0).match(/^[a-zA-Z]/))  
+      {
+         return false;
+      }
+      if(!contwinpath.charAt(1).match(/^[:]/) || !contwinpath.charAt(2).match(/^[\/\\]/))
+      {
+         return false;
+      }
+   }
+}
+
+
