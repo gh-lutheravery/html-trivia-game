@@ -60,7 +60,7 @@ class TriviaGameShow {
               categories.push(category)
            });
         }
-        
+
         else {
          row.forEach((col, colIndex) => {
             //Create unique ID for this clue
@@ -82,6 +82,15 @@ class TriviaGameShow {
 
      
   }
+
+   prepareQA(clue) {
+      let list = clue.split(':');
+      if (windowsPathValidation(list[0])) {
+         // make html for video and image (do extension endsWith to check)
+         // use lastIndexOf to split on colon
+      }
+      return list;
+   }
    
 
    // 'one, two, three'
