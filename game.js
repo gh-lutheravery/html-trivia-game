@@ -115,6 +115,30 @@ class TriviaGameShow {
       //Add to DOM
       this.boardElement.appendChild(column);
    }
+
+   handleClueClick(event) {
+      var clue = this.clues[event.target.dataset.clueId];
+
+      //Mark this button as used
+      event.target.classList.add("used");
+      
+      //Clear out the input field
+      this.inputElement.value = "";
+      
+      //Update current clue
+      this.currentClue = clue;
+
+      //Update the text
+      this.clueTextElement.textContent = this.currentClue.question;
+      this.resultTextElement.textContent = this.currentClue.answer;
+
+      //Hide the result
+      this.modalElement.classList.remove("showing-result");
+      
+      //Show the modal
+      this.modalElement.classList.add("visible");
+      this.inputElement.focus();
+   }
    
 
    // 'one, two, three'
