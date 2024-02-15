@@ -78,9 +78,14 @@ class TriviaGameShow {
          });
       }
 
-     });
+      });
 
-     
+      this.categories.push(...categories);
+
+      //Render each category to the DOM
+      this.categories.forEach((c) => {
+         this.renderCategory(c);
+      });
   }
 
    prepareQA(clue) {
@@ -90,6 +95,25 @@ class TriviaGameShow {
          // use lastIndexOf to split on colon
       }
       return list;
+   }
+
+   renderCategory(category) {      
+      let column = document.createElement("div");
+      column.classList.add("column");
+      column.innerHTML = (
+         `<header>${category.title}</header>
+         <ul>
+         </ul>`
+      ).trim();
+      
+      var ul = column.querySelector("ul");
+      category.clues.forEach(clueId => {
+         var clue = this.clues[clueId];
+         ul.innerHTML += `<li><button data-clue-id=${clueId}>${clue.value}</button></li>`
+      })
+      
+      //Add to DOM
+      this.boardElement.appendChild(column);
    }
    
 
