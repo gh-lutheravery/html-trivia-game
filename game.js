@@ -164,9 +164,6 @@ class TriviaGameShow {
       //Mark this button as used
       event.target.classList.add("used");
       
-      //Clear out the input field
-      this.inputElement.value = "";
-      
       //Update current clue
       this.currentClue = clue;
 
@@ -228,20 +225,15 @@ class TriviaGameShow {
 }
 
 
-// https://stackoverflow.com/questions/2030285/regex-for-file-path-validation-in-javascript
-function windowsPathValidation(contwinpath)
+function isFile(question)
 {
-   if((contwinpath.charAt(0) != "\\" || contwinpath.charAt(1) != "\\") || (contwinpath.charAt(0) != "/" || contwinpath.charAt(1) != "/"))
+   if(question.startsWith('img/') || 
+      question.startsWith('video/') ||
+      question.startsWith('audio/'))
    {
-      if(!contwinpath.charAt(0).match(/^[a-zA-Z]/))  
-      {
-         return false;
-      }
-      if(!contwinpath.charAt(1).match(/^[:]/) || !contwinpath.charAt(2).match(/^[\/\\]/))
-      {
-         return false;
-      }
+      return true;
    }
+   return false;
 }
 
 const game = new TriviaGameShow(document.querySelector(".app"));
