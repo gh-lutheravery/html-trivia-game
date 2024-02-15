@@ -60,7 +60,23 @@ class TriviaGameShow {
               categories.push(category)
            });
         }
-
+        
+        else {
+         row.forEach((col, colIndex) => {
+            //Create unique ID for this clue
+            var clueId = rowIndex + "-" + colIndex;
+            categories[colIndex].clues.push(clueId);
+            
+            const [question, answer] = this.prepareQA(col);
+            
+            //Add clue to DB
+            this.clues[clueId] = {
+               question: question,
+               answer: answer,
+               value: rowIndex * 100
+            };
+         });
+      }
 
      });
 
