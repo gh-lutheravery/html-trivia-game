@@ -147,6 +147,17 @@ class TriviaGameShow {
       //Show answer
       this.revealAnswer(isCorrect);
    }
+
+   revealAnswer(isCorrect) { 
+      //Show the whole result container
+      this.modalElement.classList.add("showing-result");
+      
+      //Disappear after a short bit
+      // TODO: make x btn
+      setTimeout(() => {
+         this.modalElement.classList.remove("visible");
+      }, 3000);
+   }
    
 
    // 'one, two, three'
