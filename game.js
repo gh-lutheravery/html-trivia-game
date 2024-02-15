@@ -40,6 +40,34 @@ class TriviaGameShow {
       this.fetchCategories();
    }
 
+   fetchCategories() {
+      //Fetch all of the data from the API
+     const csvList = parse(QUESTIONS_ANSWERS);
+     console.log(csvList);
+
+     //Sift through the data when all categories come back
+      
+     let categories = []
+     //Build up our list of categories
+     csvList.forEach((row, rowIndex) => {
+        //Start with a blank category
+        if (rowIndex == 0) {
+           row.forEach((category) => {
+              var category = {
+                 title: category,
+                 clues: []
+              }
+              categories.push(category)
+           });
+        }
+
+
+     });
+
+     
+  }
+   
+
    // 'one, two, three'
    // '1:1, 2:2, 3:3'
 

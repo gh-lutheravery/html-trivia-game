@@ -91,6 +91,7 @@ furnished to do so, subject to the following conditions:
     height: 100%;
     color: inherit;
     font-size: 2em;
+    appearance: none;
     -webkit-appearance: none;
     border: 0;
     background: none;
