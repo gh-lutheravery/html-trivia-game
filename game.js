@@ -97,38 +97,34 @@ class TriviaGameShow {
    prepareQA(clue) {
       // get last colon character
       let list = clue.split(/:([^:]+)$/);
+
       const question = list[0];
       let newQuestion = '';
-
-      if (windowsPathValidation(list[0])) {
+      if (isFile(question)) {
          // make html for video and image (do extension endsWith to check)
-         const filePath = '';
+         let filePath = '';
 
-         switch (question) {
-            case question.startsWith('img/'):
-               filePath = question.split('img/')[1];
-               newQuestion = `<img src="${filePath}" style="max-width:100%;max-height:100%;"/>`
-               break;
-
-            case question.startsWith('video/'):
-               filePath = question.split('video/')[1];
-               newQuestion = `<video controls>
-               <source src="${filePath}" type="video/mp4">
-               Your browser does not support the audio element.
-            </video>`
-               break;
-
-            case question.startsWith('audio/'):
-               filePath = clue.split('audio/')[1];
-               newQuestion = `<audio controls>
-               <source src="${filePath}" type="audio/mpeg">
-               Your browser does not support the audio element.
-            </audio>`
-               break;
-         
-            default:
-               break;
+         if (question.startsWith('img/'))
+         {
+            filePath = question.split('img/')[1];
+            newQuestion = `<img src="${filePath}" style="max-width:100%;max-height:100%;"/>`
          }
+         else if (question.startsWith('video/')) {
+            filePath = question.split('video/')[1];
+            newQuestion = `<video controls>
+            <source src="${filePath}" type="video/mp4">
+            Your browser does not support the audio element.
+         </video>`
+         }
+         else if (question.startsWith('audio/')) {
+            filePath = clue.split('audio/')[1];
+            newQuestion = `<audio controls>
+            <source src="${filePath}" type="audio/mpeg">
+            Your browser does not support the audio element.
+         </audio>`
+         }
+
+         newQuestion = newQuestion.slice(35, newQuestion.length)
       }
       else {
          // text question
@@ -176,7 +172,6 @@ class TriviaGameShow {
       
       //Show the modal
       this.modalElement.classList.add("visible");
-      this.inputElement.focus();
    }
 
    //Handle an answer from user
