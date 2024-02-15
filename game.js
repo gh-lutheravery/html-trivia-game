@@ -139,6 +139,14 @@ class TriviaGameShow {
       this.modalElement.classList.add("visible");
       this.inputElement.focus();
    }
+
+   //Handle an answer from user
+   handleFormSubmit(event) {
+      event.preventDefault();
+      
+      //Show answer
+      this.revealAnswer(isCorrect);
+   }
    
 
    // 'one, two, three'
@@ -152,5 +160,15 @@ class TriviaGameShow {
 
    // make file questions absolute pathes and use stackoverflow post to check for each question. 
    // use yt premium download to get files
+
+   // <audio controls>
+   //    <source src="My Hero Academia - Opening 2 _ Peace Sign (1080p_24fps_H264-128kbit_AAC).mp4" type="audio/mpeg">
+   //    Your browser does not support the audio element.
+   // </audio>
+
+   // <video controls>
+   //    <source src="My Hero Academia - Opening 2 _ Peace Sign (1080p_24fps_H264-128kbit_AAC).mp4" type="video/mp4">
+   //    Your browser does not support the audio element.
+   // </video>
  
 }
