@@ -130,7 +130,7 @@ furnished to do so, subject to the following conditions:
  }
  
  .card-model .clue-text {
-    margin-bottom: 2em;
+    margin-bottom: 0.1em;
  }
  
  .result,
@@ -183,3 +183,8 @@ furnished to do so, subject to the following conditions:
     display:block;
     margin-left: 0.1em;
  }
+
+ .result_correct-answer {
+   margin-top: 0.1em;
+ }
+
