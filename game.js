@@ -3,13 +3,12 @@ import { parse } from './node_modules/@vanillaes/csv/index.js'
 var QUESTIONS_ANSWERS = '';
 
 // load csv file into mem
-const client = new XMLHttpRequest();
-client.open('GET', '/assets/game.csv');
-client.onreadystatechange = function() {
-   QUESTIONS_ANSWERS = client.responseText;
-}
-client.send();
-
+await fetch("assets/game.csv")
+   .then((res) => res.text())
+   .then((text) => {
+      QUESTIONS_ANSWERS = text;
+   })
+   .catch((e) => console.error(e));
 
 class TriviaGameShow {
    constructor(element) {
@@ -41,38 +40,33 @@ class TriviaGameShow {
          this.handleClueClick(event);
       });
 
-      this.modalElement.addEventListener("click", event => {
+      this.modalElement.addEventListener("dblclick", event => {
          this.handleFormSubmit(event);
       });
-      
-      //Render initial state of score
       
       //Kick off the category fetch
       this.fetchCategories();
    }
 
    fetchCategories() {
-      //Fetch all of the data from the API
-     const csvList = parse(QUESTIONS_ANSWERS);
-     console.log(csvList);
+      //console.log(QUESTIONS_ANSWERS);
+      const csvList = parse(QUESTIONS_ANSWERS);
+      //console.log(csvList);
 
-     //Sift through the data when all categories come back
-      
-     let categories = []
-     //Build up our list of categories
-     csvList.forEach((row, rowIndex) => {
-        //Start with a blank category
-        if (rowIndex == 0) {
-           row.forEach((category) => {
-              var category = {
-                 title: category,
-                 clues: []
-              }
-              categories.push(category)
-           });
-        }
+      let categories = []
+      //Build up our list of categories
+      csvList.forEach((row, rowIndex) => {
+         if (rowIndex == 0) {
+            row.forEach((category) => {
+               var category = {
+                  title: category,
+                  clues: []
+               }
+               categories.push(category)
+            });
+         }
 
-        else {
+         else {
          row.forEach((col, colIndex) => {
             //Create unique ID for this clue
             var clueId = rowIndex + "-" + colIndex;
@@ -97,7 +91,7 @@ class TriviaGameShow {
       this.categories.forEach((c) => {
          this.renderCategory(c);
       });
-  }
+   }
 
    prepareQA(clue) {
       // get last colon character
@@ -195,36 +189,10 @@ class TriviaGameShow {
       this.modalElement.classList.add("showing-result");
       
       //Disappear after a short bit
-      // TODO: make x btn
       setTimeout(() => {
          this.modalElement.classList.remove("visible");
       }, 10000);
    }
-   
-
-   // 'one, two, three'
-   // '1:1, 2:2, 3:3'
-
-   // mylist[][0]
-   // for i in mylist:
-   //     if index == column:
-   //         obj = obj(str)
-   //         add obj
-
-   // make file questions absolute pathes and use stackoverflow post to check for each question. 
-   // use yt premium download to get files
-
-   // <audio controls>
-   //    <source src="My Hero Academia - Opening 2 _ Peace Sign (1080p_24fps_H264-128kbit_AAC).mp4" type="audio/mpeg">
-   //    Your browser does not support the audio element.
-   // </audio>
-
-   // <video controls>
-   //    <source src="My Hero Academia - Opening 2 _ Peace Sign (1080p_24fps_H264-128kbit_AAC).mp4" type="video/mp4">
-   //    Your browser does not support the audio element.
-   // </video>
-
-   // <img src="https://cdn.myanimelist.net/images/event/2024_malentine/header.png" style="max-width:100%;max-height:100%;"/>
 }
 
 
