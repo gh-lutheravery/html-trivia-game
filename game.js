@@ -12,8 +12,6 @@ await fetch("assets/game.csv")
 
 class TriviaGameShow {
    constructor(element) {
-      //Which categories we should use (or use default is nothing provided)
-
       //Database
       this.categories = [];
       this.clues = {};
@@ -23,15 +21,12 @@ class TriviaGameShow {
       
       //Elements
       this.boardElement = element.querySelector(".board");
-   //  this.scoreCountElement = element.querySelector(".score-count");
       this.formElement = element.querySelector("form");
       this.inputElement = element.querySelector("input[name=user-answer]");
       this.modalElement = element.querySelector(".card-modal");
       this.clueTextElement = element.querySelector(".clue-text");
       this.resultElement = element.querySelector(".result");
       this.resultTextElement = element.querySelector(".result_correct-answer-text");
-   //  this.successTextElement = element.querySelector(".result_success");
-   //  this.failTextElement = element.querySelector(".result_fail");
    }
  
    initGame() {
@@ -49,9 +44,7 @@ class TriviaGameShow {
    }
 
    fetchCategories() {
-      //console.log(QUESTIONS_ANSWERS);
       const csvList = parse(QUESTIONS_ANSWERS);
-      //console.log(csvList);
 
       let categories = []
       //Build up our list of categories
@@ -100,26 +93,26 @@ class TriviaGameShow {
       const question = list[0];
       let newQuestion = '';
       if (isFile(question)) {
-         // make html for video and image (do extension endsWith to check)
-         let filePath = '';
+         // make html for video and image
          let relativePath = '';
          if (question.startsWith('img/'))
          {
             relativePath = question.slice(35, question.length)
-            filePath = question.split('img/')[1];
             newQuestion = `<img src="${relativePath}" style="max-width:100%;max-height:100%;"/>`
          }
+
          else if (question.startsWith('video/')) {
             relativePath = question.slice(37, question.length)
-            filePath = question.split('video/')[1];
+
             newQuestion = `<video controls style="max-width:100%;max-height:100%;">
             <source src="${relativePath}" type="video/mp4">
             Your browser does not support the audio element.
          </video>`
          }
+
          else if (question.startsWith('audio/')) {
             relativePath = question.slice(37, question.length)
-            filePath = question.split('audio/')[1];
+            
             newQuestion = `<audio controls>
             <source src="${relativePath}" type="audio/mpeg">
             Your browser does not support the audio element.
